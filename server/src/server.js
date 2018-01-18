@@ -8,7 +8,7 @@ const app = express();
 
 const CONFIG = {
     PORT: process.env.PORT || 3000,
-    UPLOAD_DIR: process.env.UPLOAD_DIR || path.resolve(__dirname, 'uploads')
+    UPLOAD_DIR: process.env.UPLOAD_DIR || path.resolve(__dirname, '../uploads')
 };
 
 
@@ -21,18 +21,20 @@ const start = () => {
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
 
+        console.log('[SERVER] Uploaded files:', req.files);
         Object.keys(req.files).forEach(key => {
             const uploadedFile = req.files[key];
-            const fileName = dateformat('yymmdd-HHMMss') + randomstring(7) + '.jpg';
+            const fileName = dateformat('yymmdd-HHMMss') + randomstring.generate(7) + '.jpg';
             const filePath = path.resolve(CONFIG.UPLOAD_DIR, fileName);
 
+            console.log('[SERVER] File:', uploadedFile);
             uploadedFile.mv(filePath, function (err) {
                 if (err)
                     return res.status(500).send(err);
 
                 res.send({
                     status: 'OK',
-                    fileName: fileName
+                    fileName: fileName,
                 });
             });
         })
