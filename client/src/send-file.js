@@ -1,16 +1,17 @@
 const request = require('request');
 const fs = require('fs');
+const config = require('../../_shared/config');
 
-const CONFIG = {
-    UPLOAD_URL: process.env.UPLOAD_URL || 'http://localhost:3000/upload',
-}
+const C = config.getConfig({
+    SERVER_UPLOAD_URL: process.env.UPLOAD_URL || 'http://localhost:3000/upload',
+});
 
 const sendFile = (filePath) => {
     if(!fs.existsSync(filePath)){
         return console.log('[SENDFILE] File not found:', filePath);
     }
 
-    const req = request.post(CONFIG.UPLOAD_URL, function (err, resp, body) {
+    const req = request.post(C.SERVER_UPLOAD_URL, function (err, resp, body) {
         if (err) {
             console.log('[SENDFILE POST] Error:', err);
         } else {
