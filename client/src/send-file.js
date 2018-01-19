@@ -3,7 +3,7 @@ const fs = require('fs');
 const config = require('../../_shared/config');
 
 const C = config.getConfig({
-    SERVER_UPLOAD_URL: process.env.UPLOAD_URL || 'http://localhost:3000/upload',
+    SERVER_UPLOAD_URL: process.env.SERVER_UPLOAD_URL || 'http://localhost:3000/upload',
 });
 
 const sendFile = (filePath) => {
