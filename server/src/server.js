@@ -10,11 +10,13 @@ const app = express();
 
 const C = config.getConfig({
     SERVER_PORT: process.env.PORT || 3000,
-    SERVER_UPLOAD_DIR: process.env.UPLOAD_DIR || path.resolve(__dirname, '../uploads')
+    SERVER_UPLOAD_DIR: process.env.UPLOAD_DIR || './server/uploads'
 });
 
 
 const start = () => {
+
+    app.use('/uploads', express.static(utils.fullPath(C.SERVER_UPLOAD_DIR)));
 
     app.use(fileUpload());
 
@@ -37,7 +39,10 @@ const start = () => {
                 let error, smsResponse;
 
                 require('./send-sms/send-sms-twilio')
-                    .sendWarning()
+                    .sendWarning({ 
+                        TIME: dateformat('HH:MM:ss'),
+                        IMAGE_URL: utils.imageUrl(fileName),
+                    })
                     .then(resp => {
                         smsResponse = resp;
                         finalize();

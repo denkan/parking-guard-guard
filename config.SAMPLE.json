@@ -6,7 +6,7 @@
     "TWILIO_ACCOUNT_SID": "",
     "TWILIO_AUTH_TOKEN": "",
 
-    "SMS_MESSAGE": "Meter man detected! Hurry hurry!",
+    "SMS_MESSAGE": "Meter man detected at %TIME%.\n\nSee image: %IMAGE_URL%",
     "SMS_RECEIVER": "+46700112233",
     "SMS_SENDER": "+46700112233"
 }

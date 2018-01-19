@@ -1,4 +1,5 @@
 const twilio = require('twilio');
+const utils = require('../../../_shared/utils');
 const config = require('../../../_shared/config');
 
 const C = config.getConfig({
@@ -23,10 +24,10 @@ const send = (to, from, body) => {
     return promise;
 }
 
-const sendWarning = () => send(
+const sendWarning = (messageParams) => send(
     C.SMS_RECEIVER, 
     C.SMS_SENDER, 
-    C.SMS_MESSAGE,
+    utils.paramString(C.SMS_MESSAGE, messageParams)
 );
 
 module.exports = {
