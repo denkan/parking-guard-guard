@@ -12,6 +12,7 @@
     "dateformat": "^3.0.2",
     "express": "^4.16.2",
     "express-fileupload": "^0.3.0",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "twilio": "^3.11.0"
   }
 }

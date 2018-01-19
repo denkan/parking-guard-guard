@@ -30,13 +30,34 @@ const start = () => {
 
             console.log('[SERVER] File:', uploadedFile);
             uploadedFile.mv(filePath, function (err) {
-                if (err)
+                if (err) {
                     return res.status(500).send(err);
+                }
 
-                res.send({
-                    status: 'OK',
-                    fileName: fileName,
-                });
+                let error, smsResponse;
+
+                require('./send-sms/send-sms-twilio')
+                    .sendWarning()
+                    .then(resp => {
+                        smsResponse = resp;
+                        finalize();
+                    })
+                    .catch(err => {
+                        error = err;
+                        finalize();
+                    })
+
+                function finalize() {
+                    res
+                        .status(error ? 500 : 200)
+                        .send({
+                            status: error ? 'ERROR' : 'OK',
+                            error,
+                            fileName,
+                            sms: smsResponse,
+                        });
+                }
+
             });
         })
     });

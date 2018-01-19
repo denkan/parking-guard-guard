@@ -1,5 +1,12 @@
 {
     "SERVER_PORT": 3000,
     "SERVER_UPLOAD_DIR": "./server/uploads",
-    "SERVER_UPLOAD_URL": "http://localhost:3000/upload"
+    "SERVER_UPLOAD_URL": "http://localhost:3000/upload",
+
+    "TWILIO_ACCOUNT_SID": "",
+    "TWILIO_AUTH_TOKEN": "",
+
+    "SMS_MESSAGE": "Meter man detected! Hurry hurry!",
+    "SMS_RECEIVER": "+46700112233",
+    "SMS_SENDER": "+46700112233"
 }
