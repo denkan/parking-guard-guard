@@ -1,9 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const utils = require('./utils');
 
 const configFileName = 'config.json';
-const configFilePath = utils.fullPath(configFileName);
+const configFilePath = path.resolve('../',configFileName); 
 
 const getConfig = (defaultValues) => {
     if (!fs.existsSync(configFilePath)) {
